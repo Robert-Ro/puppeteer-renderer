@@ -5,6 +5,7 @@
 Useful server side rendering through proxy. Outputs HTML, PDF and screenshots as PNG.
 
 ## Requirements
+
 You can run Chromium or docker.
 
 ## Getting Started
@@ -20,6 +21,7 @@ docker run -d --name renderer -p 8080:3000 ghcr.io/zenato/puppeteer-renderer:lat
 `pnpm install`
 
 #### Start server (If you can run Chromium)
+
 `pnpm dev`
 (service port: 3000)
 
@@ -27,11 +29,14 @@ docker run -d --name renderer -p 8080:3000 ghcr.io/zenato/puppeteer-renderer:lat
 
 ```bash
 docker build . --file ./Dockerfile --tag local/puppeteer-renderer --build-arg SCOPE=puppeteer-renderer
-```
+
 docker run -d --name renderer -p 8080:3000 local/puppeteer-renderer
 ```
 
 ### Test on your browser
+
+> // TODO 支持更多功能
+
 Input url `http://localhost:{port}/{html|pdf|screenshot}?url=https://www.google.com`
 
 If you can see html code, server works fine.
@@ -54,16 +59,19 @@ import renderer from 'puppeteer-renderer-middleware'
 
 const app = express()
 
-app.use('/render-proxy', renderer({
-  url: 'http://installed-your-puppeteer-renderer-url',
-  // userAgentPattern: /My-Custom-Agent/i,
-  // excludeUrlPattern: /*.html$/i
-  // timeout: 30 * 1000,
-}));
+app.use(
+  '/render-proxy',
+  renderer({
+    url: 'http://installed-your-puppeteer-renderer-url',
+    // userAgentPattern: /My-Custom-Agent/i,
+    // excludeUrlPattern: /*.html$/i
+    // timeout: 30 * 1000,
+  }),
+)
 
 // your service logics..
 
-app.listen(8080);
+app.listen(8080)
 ```
 
 ## API
@@ -91,7 +99,6 @@ The file name is generated from the URL rendered:
 | `https://www.example.com/path/to/`             | `pathto.pdf`          |
 | `https://www.example.com/path/to/resource`     | `resource.pdf`        |
 | `https://www.example.com/path/to/resource.ext` | `resource.pdf`        |
-
 
 ## License
 
