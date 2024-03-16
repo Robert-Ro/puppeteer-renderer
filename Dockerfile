@@ -13,6 +13,7 @@ ARG CLEANING_TARGETS="src test .turbo .eslintrc.* jest.config.* tsup.config.* ts
 
 ARG PORT=3000
 ENV PORT=$PORT
+ENV MQTT_SEVER=emqx
 
 RUN corepack enable # 实验性工具，管理包管理器的管理器
 RUN npm install -g turbo

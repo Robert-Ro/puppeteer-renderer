@@ -1,12 +1,7 @@
 import _ from 'lodash'
 import puppeteer, { Browser, PDFOptions, Page, PuppeteerLaunchOptions } from 'puppeteer'
 import waitForAnimations from './wait-for-animations'
-import {
-  PageOptions,
-  PageViewportOptions,
-  PdfOptions,
-  ScreenshotOptions,
-} from './validate-schema'
+import { PageOptions, PageViewportOptions, PdfOptions, ScreenshotOptions } from './validate-schema'
 
 export class Renderer {
   private browser: Browser
@@ -47,7 +42,7 @@ export class Renderer {
     url: string,
     pageOptions: PageOptions,
     pageViewportOptions: PageViewportOptions,
-    screenshotOptions: ScreenshotOptions
+    screenshotOptions: ScreenshotOptions,
   ) {
     let page: Page | undefined = undefined
 
@@ -108,14 +103,18 @@ export class Renderer {
       if (page && !page.isClosed()) {
         await page.close()
       }
-    } catch (e) {}
+    } catch (e) {
+      console.error('page close error', e)
+    }
   }
 
   async close() {
     await this.browser.close()
   }
 }
-
+/**
+ * 对外的实例，create之后常驻内存中
+ */
 export let renderer: Renderer | undefined = undefined
 
 export default async function create(options: PuppeteerLaunchOptions = {}) {

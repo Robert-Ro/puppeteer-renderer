@@ -6,7 +6,7 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "dev": "tsup src/index.ts --watch --onSuccess \"node dist/index.js\"",
+    "dev": "cross-env MQTT_SEVER=127.0.0.1 tsup src/index.ts --watch --onSuccess \"node dist/index.js\"",
     "build": "tsup src/index.ts",
     "start": "node dist/index.js",
     "clean": "rimraf {dist,coverage}",
@@ -34,6 +34,7 @@
     "@types/pngjs": "^6.0.1",
     "@types/qs": "^6.9.7",
     "chai": "^4.3.7",
+    "cross-env": "^7.0.3",
     "eslint": "^8.41.0",
     "mocha": "^10.2.0",
     "rimraf": "^5.0.1",

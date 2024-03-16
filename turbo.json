@@ -8,7 +8,7 @@
     },
     "puppeteer-renderer#build": {
       "dependsOn": ["^build"],
-      "env": ["PORT", "IGNORE_HTTPS_ERRORS", "PUPPETEER_ARGS"],
+      "env": ["PORT", "IGNORE_HTTPS_ERRORS", "PUPPETEER_ARGS", "MQTT_SEVER"],
       "outputs": ["dist/**"]
     },
     "test": {

@@ -2,6 +2,7 @@ import qs from 'qs'
 import express, { NextFunction, Request, Response } from 'express'
 import createRenderer from './lib/renderer'
 import router from './router'
+import './mqtt-sub'
 
 const port = process.env.PORT || 3000
 
